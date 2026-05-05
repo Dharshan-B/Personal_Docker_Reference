@@ -1,0 +1,16 @@
+version: '3.8'
+
+# Simple example: nginx web server with a custom HTML page
+# Run: docker compose up -d
+# Visit: http://localhost:8080
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: simple-web
+    ports:
+      - "8080:80"
+    volumes:
+      # Serve a custom HTML file from current directory
+      - ./html:/usr/share/nginx/html:ro
+    restart: unless-stopped

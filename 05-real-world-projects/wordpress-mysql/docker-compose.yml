@@ -1,0 +1,50 @@
+version: '3.8'
+
+# WordPress + MySQL
+# Run: docker compose up -d
+# Visit: http://localhost:8080
+# Complete the WordPress setup wizard
+
+services:
+
+  # ── MySQL Database ──────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: wordpress-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - wordpress-network
+    restart: unless-stopped
+
+  # ── WordPress ───────────────────────────────────
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress-app
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppassword
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - wordpress-network
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  wordpress_data:
+
+networks:
+  wordpress-network:
+    driver: bridge

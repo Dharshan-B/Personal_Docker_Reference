@@ -1,0 +1,37 @@
+# Docker .gitignore
+
+# Environment variable files — NEVER commit secrets!
+.env
+.env.local
+.env.*.local
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Node.js (for node-based docker projects)
+node_modules/
+npm-debug.log*
+
+# Python (for python-based docker projects)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Docker build artifacts
+*.tar
+
+# Temporary files
+*.tmp
+*.temp

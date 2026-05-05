@@ -1,0 +1,55 @@
+# .dockerignore example
+# Copy this file to your project root as .dockerignore
+
+# ── Node.js ─────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.npm/
+
+# ── Python ──────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# ── Environment & Secrets ───────────────
+.env
+.env.local
+.env.*.local
+*.env
+secrets/
+
+# ── Git ─────────────────────────────────
+.git/
+.gitignore
+
+# ── IDE & Editor ────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS Files ────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs ────────────────────────────────
+logs/
+*.log
+
+# ── Tests & Docs (optional) ─────────────
+# Uncomment if you don't need these in the image
+# tests/
+# docs/
+# README.md
+
+# ── Docker files themselves ──────────────
+Dockerfile*
+docker-compose*.yml
+.dockerignore

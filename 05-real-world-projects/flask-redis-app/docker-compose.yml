@@ -1,0 +1,39 @@
+version: '3.8'
+
+# Flask + Redis Hit Counter
+# Run: docker compose up -d
+# Visit: http://localhost:5000
+
+services:
+
+  # ── Flask Web App ───────────────────────────────
+  web:
+    build: .
+    container_name: flask-app
+    ports:
+      - "5000:5000"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - redis
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # ── Redis Cache ─────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: redis-cache
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+
+networks:
+  app-network:
+    driver: bridge
