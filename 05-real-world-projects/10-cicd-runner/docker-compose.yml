@@ -1,19 +1,20 @@
 version: '3.8'
 services:
   runner:
-    image: gitlab/gitlab-runner:latest
+    image: docker:24.0-cli
+    command: sleep infinity
     environment:
-      DOCKER_HOST: tcp://dind:2376
+      DOCKER_HOST: tcp://docker:2376
       DOCKER_TLS_VERIFY: 1
       DOCKER_CERT_PATH: /certs/client
     volumes:
-      - shared-certs:/certs/client
+      - shared-certs:/certs
     depends_on:
-      - dind
+      - docker
     networks:
       - ci-net
 
-  dind:
+  docker:
     image: docker:24.0-dind
     privileged: true
     environment:
