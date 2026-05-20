@@ -14,13 +14,13 @@ Docker is a platform that lets you **package, ship, and run applications in cont
 
 ### Containers vs Virtual Machines
 
-| Feature | Container | Virtual Machine |
-|---|---|---|
-| Size | MBs | GBs |
-| Startup Time | Seconds | Minutes |
-| OS | Shares host OS kernel | Full OS inside |
-| Isolation | Process-level | Full hardware-level |
-| Use Case | Microservices, apps | Full OS environments |
+| Feature       | Container             | Virtual Machine           |
+|---            |---                    |---                        |
+| Size          | MBs                   | GBs                       |
+| Startup Time  | Seconds               | Minutes                   |
+| OS            | Shares host OS kernel | Full OS inside            |
+| Isolation     | Process-level         | Full hardware-level       |
+| Use Case      | Microservices, apps   | Full OS environments      |
 
 ### Docker Architecture
 
@@ -44,14 +44,14 @@ Docker is a platform that lets you **package, ship, and run applications in cont
 
 ### Key Terms
 
-| Term | Definition |
-|---|---|
-| **Image** | Read-only blueprint/template for a container |
-| **Container** | A running instance of an image |
-| **Dockerfile** | A script of instructions to build an image |
-| **Registry** | A storage for Docker images (e.g., Docker Hub) |
-| **Volume** | Persistent storage for container data |
-| **Network** | Communication channel between containers |
+| Term           | Definition                                    |
+|---             |---                                            |
+| **Image**      | Read-only blueprint/template for a container  |
+| **Container**  | A running instance of an image                |
+| **Dockerfile** | A script of instructions to build an image    |
+| **Registry**   | A storage for Docker images (e.g., Docker Hub)|
+| **Volume**     | Persistent storage for container data         |
+| **Network**    | Communication channel between containers      |
 
 ---
 
@@ -120,7 +120,7 @@ docker exec my-nginx ls /etc/nginx  # Run a one-off command
 
 ## 🧠 My Notes
 
-<!-- Add your personal notes and "aha moments" here as you learn -->
+
 
 ### What I understood:
 

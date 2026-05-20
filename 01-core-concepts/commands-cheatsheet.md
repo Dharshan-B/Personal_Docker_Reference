@@ -141,18 +141,18 @@ docker system prune -a --volumes     # Also remove volumes (CAREFUL!)
 
 ## 🔍 Useful Flags Reference
 
-| Flag | Short | Meaning |
-|------|-------|---------|
-| `--detach` | `-d` | Run in background |
-| `--interactive` | `-i` | Keep STDIN open |
-| `--tty` | `-t` | Allocate a terminal |
-| `--publish` | `-p` | Publish port (host:container) |
-| `--volume` | `-v` | Mount volume |
-| `--env` | `-e` | Set environment variable |
-| `--name` | | Assign container name |
-| `--network` | | Connect to a network |
-| `--rm` | | Auto-remove when stopped |
-| `--build` | | Rebuild image (compose) |
+| Flag        | Short | Meaning |
+|-------------|-------|---------|
+| `--detach`  | `-d`  | Run in background |
+| `--interactive` | `-i`  | Keep STDIN open |
+| `--tty`     | `-t`  | Allocate a terminal |
+| `--publish` | `-p`  | Publish port (host:container) |
+| `--volume`  | `-v`  | Mount volume |
+| `--env`     | `-e`  | Set environment variable |
+| `--name`    |       | Assign container name |
+| `--network` |       | Connect to a network |
+| `--rm`      |       | Auto-remove when stopped |
+| `--build`   |       | Rebuild image (compose) |
 
 ---
 
