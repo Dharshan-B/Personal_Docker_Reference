@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copy only package files first (caching optimization)
 COPY package*.json ./
-RUN npm ci --only=production
+RUN mkdir -p node_modules && npm install --omit=dev
 
 # Copy source code
 COPY . .
