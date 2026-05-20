@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Three-Tier App</title>
+</head>
+<body style="font-family: Arial; background: #0d1117; color: #58a6ff; text-align: center; padding: 50px;">
+    <h1>🐳 Three-Tier App Frontend</h1>
+    <p style="color: #8b949e;">Loaded static files from Nginx successfully!</p>
+    <div id="api-status" style="padding: 20px; font-weight: bold; background: #161b22; border-radius: 6px; display: inline-block; margin-top: 20px;">
+        Loading API status...
+    </div>
+    <script>
+        fetch('/api/users')
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('api-status').innerHTML = '<span style="color: #f85149;">API Connected but DB failed!</span>';
+                } else {
+                    document.getElementById('api-status').innerHTML = '<span style="color: #3fb950;">API & DB Connected!</span><br><br>Users in DB: ' + JSON.stringify(data);
+                }
+            })
+            .catch(err => {
+                document.getElementById('api-status').innerHTML = '<span style="color: #f85149;">Failed to connect to API.</span>';
+            });
+    </script>
+</body>
+</html>

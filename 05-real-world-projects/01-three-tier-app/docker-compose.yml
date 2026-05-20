@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./dist:/usr/share/nginx/html:ro
+    depends_on:
+      - api
+    networks:
+      - app-net
+
+  api:
+    build: ./api
+    environment:
+      DATABASE_URL: postgres://admin:secret@db:5432/production
+    depends_on:
+      - db
+    networks:
+      - app-net
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: production
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-net
+
+volumes:
+  pgdata:
+
+networks:
+  app-net:

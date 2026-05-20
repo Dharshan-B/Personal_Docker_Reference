@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  runner:
+    image: gitlab/gitlab-runner:latest
+    environment:
+      DOCKER_HOST: tcp://dind:2376
+      DOCKER_TLS_VERIFY: 1
+      DOCKER_CERT_PATH: /certs/client
+    volumes:
+      - shared-certs:/certs/client
+    depends_on:
+      - dind
+    networks:
+      - ci-net
+
+  dind:
+    image: docker:24.0-dind
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - shared-certs:/certs
+    networks:
+      - ci-net
+
+volumes:
+  shared-certs:
+
+networks:
+  ci-net:

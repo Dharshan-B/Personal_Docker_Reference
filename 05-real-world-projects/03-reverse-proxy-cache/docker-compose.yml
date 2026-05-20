@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+    networks:
+      - cache-net
+
+  web:
+    build: ./web
+    environment:
+      REDIS_HOST: cache
+    depends_on:
+      - cache
+    networks:
+      - cache-net
+
+  cache:
+    image: redis:7-alpine
+    networks:
+      - cache-net
+
+networks:
+  cache-net:

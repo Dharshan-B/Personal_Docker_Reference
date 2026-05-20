@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus:v2.44.0
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prom-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitor-net
+
+  grafana:
+    image: grafana/grafana:9.5.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - monitor-net
+
+  node-exporter:
+    image: prom/node-exporter:v1.6.0
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+    networks:
+      - monitor-net
+
+volumes:
+  prom-data:
+  grafana-data:
+
+networks:
+  monitor-net:

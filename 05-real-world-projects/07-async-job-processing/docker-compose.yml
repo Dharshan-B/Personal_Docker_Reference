@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  web:
+    build: ./app
+    ports:
+      - "8000:8000"
+    environment:
+      CELERY_BROKER_URL: redis://broker:6379/0
+      CELERY_RESULT_BACKEND: redis://broker:6379/0
+    depends_on:
+      - broker
+    networks:
+      - task-net
+
+  broker:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - task-net
+
+  worker:
+    build: ./app
+    command: celery -A tasks worker --loglevel=info
+    environment:
+      CELERY_BROKER_URL: redis://broker:6379/0
+      CELERY_RESULT_BACKEND: redis://broker:6379/0
+    depends_on:
+      - broker
+    networks:
+      - task-net
+
+networks:
+  task-net:

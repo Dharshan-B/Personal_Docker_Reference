@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  publisher:
+    build: ./publisher
+    ports:
+      - "8000:8000"
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@broker:5672/
+    depends_on:
+      - broker
+    networks:
+      - event-net
+
+  broker:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - event-net
+
+  worker:
+    build: ./worker
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@broker:5672/
+      MONGO_URL: mongodb://db:27017/jobs
+    depends_on:
+      - broker
+      - db
+    networks:
+      - event-net
+
+  db:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - event-net
+
+volumes:
+  mongodata:
+
+networks:
+  event-net:
