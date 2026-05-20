@@ -35,10 +35,26 @@ docker compose up -d
   ```
 
 ### 3. View Logs inside Kibana
-1. Open your browser and visit: `http://localhost:5601`.
-2. Go to **Management** $ightarrow$ **Stack Management** $ightarrow$ **Data Views**.
-3. Create a data view matching `docker-logs-*`.
-4. Go back to **Analytics** $ightarrow$ **Discover** to see a live stream of all logs from your containers!
+1. **Open Kibana:** Go to `http://localhost:5601` in your browser.
+2. **Access Stack Management:** 
+   * Click the **hamburger menu (☰)** in the top-left corner.
+   * Scroll to the bottom and click **Stack Management** (under the "Management" section).
+3. **Navigate to Data Views:**
+   * In the left sidebar under **Kibana**, click on **Data Views** (formerly called "Index Patterns").
+4. **Create a Data View:**
+   * Click the blue **Create data view** button in the top-right corner.
+   * In the flyout panel that appears, enter the following:
+     * **Name:** `docker-logs-*`
+     * **Index pattern:** `docker-logs-*` *(Kibana will display a success message confirming it matches your active indices).*
+     * **Timestamp field:** Select `@timestamp` from the dropdown menu.
+   * Click the **Save data view to Kibana** button at the bottom.
+5. **View Live Logs in Discover:**
+   * Open the **hamburger menu (☰)** again.
+   * Under the **Analytics** section, click on **Discover**.
+   * In the top-left dropdown, select your newly created `docker-logs-*` data view.
+   * You will now see a live, interactive stream of all stdout/stderr logs from all your active Docker containers!
+
+
 
 ### 4. Clean Up
 Stop the ELK stack and clean volumes:

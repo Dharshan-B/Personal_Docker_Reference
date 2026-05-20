@@ -5,7 +5,9 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
     volumes:
       - es-data:/usr/share/elasticsearch/data
     networks:
@@ -34,6 +36,7 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.8.1
     user: root
+    command: ["filebeat", "-e", "-strict.perms=false"]
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
